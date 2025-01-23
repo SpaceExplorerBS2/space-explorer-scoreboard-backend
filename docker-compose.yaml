@@ -3,5 +3,7 @@ services:
     build: .
     ports:
       - "7213:8000"
+    volumes:
+      - .:/app
     environment:
       - PYTHONUNBUFFERED=1
