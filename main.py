@@ -1,10 +1,10 @@
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-BACKEND_URL = "https://api-space-explorer.programar.io" 
+BACKEND_URL = "https://api-space-explorer.programar.io"
 
 
 @app.get("/")
@@ -30,7 +30,12 @@ async def get_players():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/scoreboard")
+@app.get(
+    "/scoreboard",
+    status_code=status.HTTP_200_OK,
+    summary="Get the scoreboard",
+    description="Get the scoreboard of the player scores"
+    )
 async def get_scoreboard():
     resource_values = {
         "iron": 1,
